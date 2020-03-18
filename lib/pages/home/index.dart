@@ -14,6 +14,22 @@ class _HomePageState extends State<HomePage> {
         centerTitle: true,
         elevation: 0.0,
       ),
+      body: ListView(
+        children: <Widget>[
+          FlatButton(
+            child: Text('/login'),
+            onPressed: () {
+              Navigator.pushNamed(context, '/login');
+            },
+          ),
+          FlatButton(
+            child: Text('不存在'),
+            onPressed: () {
+              Navigator.pushNamed(context, '/aaaa');
+            },
+          ),
+        ],
+      )
     );
   }
 }
