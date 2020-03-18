@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       theme: ThemeData(primaryColor: Colors.green),
       title: 'Moo zf',
-      home: LoginPage(),
+      // home: LoginPage(),
       onGenerateRoute: router.generator,
     );
   }
