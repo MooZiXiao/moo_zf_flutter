@@ -11,6 +11,7 @@ class MyApp extends StatelessWidget {
     Router router = Router();
     Routes.configureRoutes(router);
     return MaterialApp(
+      theme: ThemeData(primaryColor: Colors.green),
       title: 'Moo zf',
       home: LoginPage(),
       onGenerateRoute: router.generator,
