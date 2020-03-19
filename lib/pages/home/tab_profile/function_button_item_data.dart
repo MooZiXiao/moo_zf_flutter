@@ -16,12 +16,12 @@ final List<FunctionButtonItem> list = [
   FunctionButtonItem('static/images/home_profile_message.png', '联系我们', null),
   FunctionButtonItem('static/images/home_profile_contract.png', '电子合同', null),
   FunctionButtonItem('static/images/home_profile_house.png', '房屋管理', (context) {
-    bool isLogin = true;
+    bool isLogin = false;
     if (isLogin) {
-      Navigator.pushNamed(context, 'roomManage');
+      Navigator.pushNamed(context, '/roomManage');
       return;
     }
-    Navigator.pushNamed(context, 'login');
+    Navigator.pushNamed(context, '/login');
   }),
   FunctionButtonItem('static/images/home_profile_wallet.png', '钱包', null),
 ];
