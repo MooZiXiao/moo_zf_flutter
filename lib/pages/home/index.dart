@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:moo_zf_flutter/pages/home/tab_home.dart';
 import 'package:moo_zf_flutter/pages/home/tab_info/index.dart';
+import 'package:moo_zf_flutter/pages/home/tab_profile/index.dart';
 import 'package:moo_zf_flutter/pages/home/tab_search/index.dart';
 
 class HomePage extends StatefulWidget {
@@ -12,7 +13,7 @@ List<Widget> tabList = [
   TabHomePage(),
   TabSearch(),
   TabInfo(),
-  TabHomePage()
+  TabProfile()
 ];
 
 List<BottomNavigationBarItem> itemContent = [
