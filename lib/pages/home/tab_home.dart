@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:moo_zf_flutter/pages/home/index_navigator.dart';
+import 'package:moo_zf_flutter/pages/home/tab_Index/info/index.dart';
+import 'package:moo_zf_flutter/pages/home/tab_Index/navigator/index_navigator.dart';
+import 'package:moo_zf_flutter/pages/home/tab_Index/recommend/index_recommend.dart';
 import 'package:moo_zf_flutter/widget/common_swiper.dart';
 
 class TabHomePage extends StatelessWidget {
@@ -18,7 +20,9 @@ class TabHomePage extends StatelessWidget {
           // nav
           IndexNavigator(),
           // 推荐
-          
+          IndexRecommend(),
+          // 资讯
+          InfoIndex(showTitle: true,),
         ],
       ),
     );

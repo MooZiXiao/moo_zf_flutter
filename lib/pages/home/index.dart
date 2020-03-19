@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:moo_zf_flutter/pages/home/tab_home.dart';
+import 'package:moo_zf_flutter/pages/home/tab_info/index.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -9,7 +10,7 @@ class HomePage extends StatefulWidget {
 List<Widget> tabList = [
   TabHomePage(),
   TabHomePage(),
-  TabHomePage(),
+  TabInfo(),
   TabHomePage()
 ];
 

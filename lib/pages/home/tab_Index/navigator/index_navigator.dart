@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:moo_zf_flutter/pages/home/index_nav_item.dart';
+import 'package:moo_zf_flutter/pages/home/tab_Index/navigator/index_nav_item.dart';
 import 'package:moo_zf_flutter/widget/common_image.dart';
 
 class IndexNavigator extends StatelessWidget {
