@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:moo_zf_flutter/pages/home/index_nav.dart';
 import 'package:moo_zf_flutter/pages/home/index_navigator.dart';
 import 'package:moo_zf_flutter/widget/common_swiper.dart';
 
@@ -18,6 +17,7 @@ class TabHomePage extends StatelessWidget {
           CommonSwiper(),
           // nav
           IndexNavigator(),
+          // 推荐
           
         ],
       ),

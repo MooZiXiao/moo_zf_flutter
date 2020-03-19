@@ -25,6 +25,7 @@ dependencies:
   cupertino_icons: ^0.1.2
   fluro: ^1.6.1
   flutter_swiper: ^1.1.6
+  flutter_advanced_networkimage: any
   
 dev_dependencies:
   flutter_test:
@@ -49,6 +50,11 @@ flutter:
     - static/images/home_index_navigator_map.png
     - static/images/home_index_navigator_share.png
     - static/images/home_index_navigator_rent.png
+    - static/images/home_index_recommend_1.png
+    - static/images/home_index_recommend_2.png
+    - static/images/home_index_recommend_3.png
+    - static/images/home_index_recommend_4.png
+
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 

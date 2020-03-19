@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:moo_zf_flutter/pages/home/index_nav_item.dart';
+import 'package:moo_zf_flutter/widget/common_image.dart';
 
 class IndexNavigator extends StatelessWidget {
   @override
@@ -16,8 +17,8 @@ class IndexNavigator extends StatelessWidget {
               },
               child: Column(
                 children: <Widget>[
-                  Image.asset(item.uri, width: 47.5,),
-                  Text(item.title)
+                  CommonImage(item.uri, width: 47.5,),
+                  Text(item.title, style: TextStyle(fontSize: 14.0, fontWeight: FontWeight.w500),)
                 ],
               ),
             )
