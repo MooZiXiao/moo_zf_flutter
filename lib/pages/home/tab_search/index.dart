@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:moo_zf_flutter/pages/home/tab_search/data.dart';
+import 'package:moo_zf_flutter/pages/home/tab_search/filter_bar/filter_drawer.dart';
+import 'package:moo_zf_flutter/pages/home/tab_search/filter_bar/index.dart';
 import 'package:moo_zf_flutter/widget/common_list_item.dart';
 import 'package:moo_zf_flutter/widget/search_bar/index.dart';
 
@@ -12,7 +14,9 @@ class _TabSearchState extends State<TabSearch> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      endDrawer: FilterDrawer(),
       appBar: AppBar(
+        actions: <Widget>[Container()],
         title: 
           // 搜索
           SearchBarWidget(
@@ -28,7 +32,9 @@ class _TabSearchState extends State<TabSearch> {
         children: <Widget>[
           Container(
             height: 40.0,
-            child: Text('filterBar'),
+            child: FilterBar(onChange: (data) {
+              
+            },),
           ),
           Expanded(
             child: ListView(

@@ -1,20 +1,6 @@
-import 'package:fluro/fluro.dart';
+// 依赖
 import 'package:flutter/material.dart';
-import 'package:moo_zf_flutter/pages/login/index.dart';
-import 'package:moo_zf_flutter/routes.dart';
+import 'package:moo_zf_flutter/application.dart';
 
-void main() => runApp(MyApp());
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    Router router = Router();
-    Routes.configureRoutes(router);
-    return MaterialApp(
-      theme: ThemeData(primaryColor: Colors.green),
-      title: 'Moo zf',
-      // home: LoginPage(),
-      onGenerateRoute: router.generator,
-    );
-  }
-}
+//程序入口
+void main() => runApp(Application());
