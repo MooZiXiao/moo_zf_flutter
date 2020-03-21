@@ -1,6 +1,9 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:moo_zf_flutter/widget/common_floating_action_button.dart';
 import 'package:moo_zf_flutter/widget/common_form_item.dart';
+import 'package:moo_zf_flutter/widget/common_image_picker.dart';
 import 'package:moo_zf_flutter/widget/common_radio_form_item.dart';
 import 'package:moo_zf_flutter/widget/common_select_form_item.dart';
 import 'package:moo_zf_flutter/widget/common_title.dart';
@@ -118,7 +121,10 @@ class _RoomAddPageState extends State<RoomAddPage> {
               });
             }
           ),
-          CommonTitle('房源头像'),
+          CommonTitle('房源图像'),
+          CommonImagePicker(
+            onChange: (List<File> files) {},
+          ),
           CommonTitle('房源标题'),
           CommonTitle('房源配置'),
           CommonTitle('房源描述'),
