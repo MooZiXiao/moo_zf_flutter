@@ -5,6 +5,7 @@ import 'package:moo_zf_flutter/pages/login/index.dart';
 import 'package:moo_zf_flutter/pages/notFound.dart';
 import 'package:moo_zf_flutter/pages/register/index.dart';
 import 'package:moo_zf_flutter/pages/romm_add/index.dart';
+import 'package:moo_zf_flutter/pages/room_detail/index.dart';
 import 'package:moo_zf_flutter/pages/room_manage/index.dart';
 import 'package:moo_zf_flutter/pages/setting.dart';
 
@@ -16,6 +17,7 @@ class Routes {
   static String setting = '/setting';
   static String roomManage = '/roomManage';
   static String roomAdd = '/roomAdd';
+  static String roomDetail = '/roomDetail/:roomId';
   
   // 定义路由处理函数
   static Handler _homeHandler = Handler(handlerFunc: (BuildContext context, Map<String, dynamic> params) {
@@ -36,6 +38,9 @@ class Routes {
   static Handler _roomAddHandler = Handler(handlerFunc: (BuildContext context, Map<String, dynamic> params) {
     return RoomAddPage();
   });
+  static Handler _roomDetailHandler = Handler(handlerFunc: (BuildContext context, Map<String, dynamic> params) {
+    return RoomDetailPage();
+  });
   static Handler _notFoundHandler = Handler(handlerFunc: (BuildContext context, Map<String, dynamic> params) {
     return NotFoundPage();
   });
@@ -48,6 +53,7 @@ class Routes {
     router.define(setting, handler: _settingHandler);
     router.define(roomManage, handler: _roomManageHandler);
     router.define(roomAdd, handler: _roomAddHandler);
+    router.define(roomDetail, handler: _roomDetailHandler);
     router.notFoundHandler = _notFoundHandler;
   }
 }
