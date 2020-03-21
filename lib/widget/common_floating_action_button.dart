@@ -12,7 +12,7 @@ class CommonFloatingActionButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        if(null != onTap) onTap(context);
+        if(null != onTap) onTap();
       },
       child: Container(
         height: 40.0,

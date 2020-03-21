@@ -26,7 +26,9 @@ class RoomManagePage extends StatelessWidget {
           ),
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-        floatingActionButton: CommonFloatingActionButton('发布房源', () {Navigator.pushNamed(context, '/roomAdd');}),
+        floatingActionButton: CommonFloatingActionButton('发布房源', () {
+          Navigator.pushNamed(context, '/roomAdd');
+        }),
         body: TabBarView(
           children: <Widget>[
             ListView(
