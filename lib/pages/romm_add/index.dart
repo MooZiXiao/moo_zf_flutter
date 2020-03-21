@@ -7,6 +7,7 @@ import 'package:moo_zf_flutter/widget/common_image_picker.dart';
 import 'package:moo_zf_flutter/widget/common_radio_form_item.dart';
 import 'package:moo_zf_flutter/widget/common_select_form_item.dart';
 import 'package:moo_zf_flutter/widget/common_title.dart';
+import 'package:moo_zf_flutter/widget/room_appliance.dart';
 
 class RoomAddPage extends StatefulWidget {
   @override
@@ -19,6 +20,10 @@ class _RoomAddPageState extends State<RoomAddPage> {
   int roomType = 0;
   int floor = 0;
   int oriented = 0;
+  var titleController = TextEditingController();
+  var descController = TextEditingController();
+
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -126,8 +131,35 @@ class _RoomAddPageState extends State<RoomAddPage> {
             onChange: (List<File> files) {},
           ),
           CommonTitle('房源标题'),
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: 10.0),
+            child: TextField(
+              controller: titleController,
+              decoration: InputDecoration(
+                hintText: '请输入标题（例如：整组，小区名 2室 2000元）',
+                border: InputBorder.none
+              ),
+            )
+          ),
           CommonTitle('房源配置'),
+          RoomAppliance(
+            onChange: (data) {
+              
+            },
+          ),
           CommonTitle('房源描述'),
+          Container(
+            margin: EdgeInsets.only(bottom: 100.0),
+            padding: EdgeInsets.symmetric(horizontal: 10.0),
+            child: TextField(
+              controller: descController,
+              maxLines: 10,
+              decoration: InputDecoration(
+                hintText: '请输入房屋描述信息',
+                border: InputBorder.none
+              ),
+            )
+          ),
           // 
 
         ],
