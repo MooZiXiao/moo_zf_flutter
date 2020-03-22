@@ -1,4 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:moo_zf_flutter/utils/common_toast.dart';
+import 'package:moo_zf_flutter/utils/dio_http.dart';
+import 'package:moo_zf_flutter/utils/request_url.dart';
+import 'package:moo_zf_flutter/utils/string_is_null_or_empty.dart';
 
 class RegisterPage extends StatefulWidget {
   @override
@@ -6,7 +12,47 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
-  bool showPwd = true;
+  bool showPwd = false;
+  bool showRePwd = false;
+  var usernameController = TextEditingController();
+  var pwdController = TextEditingController();
+  var rePwdController = TextEditingController();
+
+  _registerHandler () async {
+    var username = usernameController.text;
+    var password = pwdController.text;
+    var repeatPassword = rePwdController.text;
+
+    if(stringIsNullOrEmpty(username) || stringIsNullOrEmpty(password)) {
+      CommonToast.ShowToast('用户名或密码不为空');
+      return;
+    }
+
+    if(password != repeatPassword) {
+      CommonToast.ShowToast('两次密码输入不一致');
+      return;
+    }
+    // 调用接口前的准备
+    var url = UserUri.Register;
+    var params = {
+      "username": username,
+      "password": password
+    };
+    // 调用接口
+    var res = await DioHttp.of(context).post(url, params);
+    // 解码
+    var resString = json.decode(res.toString());
+    // print(res);
+    // print('=============');
+    // print(resString);
+    int status = resString['status'];
+    String description = resString['description'];
+    CommonToast.ShowToast(description);
+    if(status.toString().startsWith('2')) {
+      Navigator.pushReplacementNamed(context, '/login');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,12 +66,14 @@ class _RegisterPageState extends State<RegisterPage> {
         child: ListView(
           children: <Widget>[
             TextField(
+              controller: usernameController,
               decoration: new InputDecoration(
                 labelText: '用户名',
                 hintText: '请输入用户名'
               ),
             ),
             TextField(
+              controller: pwdController,
               obscureText: !showPwd,
               decoration: new InputDecoration(
                 labelText: '密码',
@@ -41,15 +89,16 @@ class _RegisterPageState extends State<RegisterPage> {
               ),
             ),
             TextField(
-              obscureText: !showPwd,
+              controller: rePwdController,
+              obscureText: !showRePwd,
               decoration: new InputDecoration(
                 labelText: '确认密码',
                 hintText: '请输入确认密码',
                 suffixIcon: IconButton(
-                  icon: Icon(showPwd ? Icons.visibility_off : Icons.visibility),
+                  icon: Icon(showRePwd ? Icons.visibility_off : Icons.visibility),
                   onPressed: () {
                     setState(() {
-                      showPwd = !showPwd;
+                      showRePwd = !showRePwd;
                     });
                   },
                 )
@@ -67,7 +116,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
               ),
               onPressed: () {
-
+                _registerHandler();
               },
             ),
             Row(
