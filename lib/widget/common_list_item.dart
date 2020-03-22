@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:moo_zf_flutter/config.dart';
 import 'package:moo_zf_flutter/model/room_list_item_data.dart';
 import 'package:moo_zf_flutter/widget/common_image.dart';
 import 'package:moo_zf_flutter/widget/common_tag.dart';
@@ -8,6 +9,7 @@ class CommonListItemWidget extends StatelessWidget {
   CommonListItemWidget(this.data);
   @override
   Widget build(BuildContext context) {
+    var imageUrl = data.imageUri.startsWith('http') ? data.imageUri : Config.BaseUrl + data.imageUri;
     return GestureDetector(
       onTap: () {
         Navigator.pushNamed(context, '/roomDetail/:${data.id}');
@@ -16,7 +18,7 @@ class CommonListItemWidget extends StatelessWidget {
         padding: EdgeInsets.only(left: 10.0, right: 10.0, bottom: 10.0),
         child: Row(
           children: <Widget>[
-            CommonImage(data.imageUri, width: 132.5, height: 100.0,),
+            CommonImage(imageUrl, width: 132.5, height: 100.0,),
             Padding(padding: EdgeInsets.only(left: 10.0),),
             Expanded(
               child: Column(

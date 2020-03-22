@@ -1,13 +1,17 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:moo_zf_flutter/model/general_type.dart';
 import 'package:moo_zf_flutter/pages/home/tab_search/filter_bar/data.dart';
 import 'package:moo_zf_flutter/pages/home/tab_search/filter_bar/item.dart';
+import 'package:moo_zf_flutter/scoped_model/city.dart';
 import 'package:moo_zf_flutter/scoped_model/room_filter.dart';
 import 'package:moo_zf_flutter/utils/common_picker/index.dart';
+import 'package:moo_zf_flutter/utils/dio_http.dart';
 import 'package:moo_zf_flutter/utils/scopoed_model_helper.dart';
 
+String lastCityId;
 class FilterBar extends StatefulWidget {
   final ValueChanged<FilterBarResult> onChange;
 
@@ -18,6 +22,13 @@ class FilterBar extends StatefulWidget {
 }
 
 class _FilterBarState extends State<FilterBar> {
+  List<GeneralType> areaList = [];
+  List<GeneralType> priceList = [];
+  List<GeneralType> rentTypeList = [];
+  List<GeneralType> roomTypeList = [];
+  List<GeneralType> orientedList = [];
+  List<GeneralType> floorList = [];
+
   bool isAreaActive = false;
   bool isRentTypeActive = false;
   bool isPriceActive = false;
@@ -110,7 +121,34 @@ class _FilterBarState extends State<FilterBar> {
     }
   }
 
-  _getData() {
+  _getData() async {
+    var cityId = ScopedModelHelper.getAreaId(context);
+    lastCityId = cityId;
+    final url = '/houses/condition?id=$cityId';
+
+    var res = await DioHttp.of(context).get(url);
+    var data = json.decode(res.toString())['body'];
+
+    if (!this.mounted) {
+      return;
+    }
+
+    List<GeneralType> areaList = List<GeneralType>.from(data['area']['children'].map((item) => GeneralType.formJson(item)).toList());
+    List<GeneralType> priceList = List<GeneralType>.from(data['price'].map((item) => GeneralType.formJson(item)).toList());
+    List<GeneralType> rentTypeList = List<GeneralType>.from(data['rentType'].map((item) => GeneralType.formJson(item)).toList());
+    List<GeneralType> roomTypeList = List<GeneralType>.from(data['roomType'].map((item) => GeneralType.formJson(item)).toList());
+    List<GeneralType> orientedList = List<GeneralType>.from(data['oriented'].map((item) => GeneralType.formJson(item)).toList());
+    List<GeneralType> floorList = List<GeneralType>.from(data['floor'].map((item) => GeneralType.formJson(item)).toList());
+
+    setState(() {
+      this.areaList = areaList;
+      this.priceList = priceList;
+      this.rentTypeList = rentTypeList;
+      this.roomTypeList = roomTypeList;
+      this.orientedList = orientedList;
+      this.floorList = floorList;
+    });
+
     Map<String, List<GeneralType>> dataList = Map<String, List<GeneralType>> ();
     dataList['roomTypeList'] = roomTypeList;
     dataList['orientedList'] = orientedList;
@@ -127,6 +165,9 @@ class _FilterBarState extends State<FilterBar> {
   @override
   void didChangeDependencies() {
     _onChange(context);
+    if(lastCityId != null && ScopedModelHelper.getAreaId(context) != lastCityId) {
+      _getData();
+    }
     super.didChangeDependencies();
   }
 

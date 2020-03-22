@@ -3,4 +3,3 @@ class UserUri {
   static const Login = '/user/login';
   static const GetUserInfo = '/user';
 }
-
