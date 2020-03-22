@@ -1,18 +1,6 @@
-class RoomListItemData {
-  final String id;
-  final String title;
-  final String subTitle;
-  final String imageUri;
-  final List<String> tags;
-  final int price;
-  const RoomListItemData(
-      {this.title,
-      this.subTitle,
-      this.imageUri,
-      this.tags,
-      this.price,
-      this.id});
-}
+
+
+import 'package:moo_zf_flutter/model/room_list_item_data.dart';
 
 const List<RoomListItemData> dataList = [
   RoomListItemData(

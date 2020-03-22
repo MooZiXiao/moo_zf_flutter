@@ -1,4 +1,4 @@
-import 'package:moo_zf_flutter/pages/home/tab_search/filter_bar/data.dart';
+import 'package:moo_zf_flutter/model/general_type.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 class FilterBarModal extends Model {

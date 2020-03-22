@@ -1,3 +1,5 @@
+import 'package:moo_zf_flutter/model/general_type.dart';
+
 class  FilterBarResult {
   final String areaId ;
   final String priceId ;
@@ -9,12 +11,7 @@ class  FilterBarResult {
 }
 
 //通用类型
-class GeneralType{
-  final String name;
-  final String id;
 
-  GeneralType(this.name, this.id);
-}
 
 List<GeneralType> areaList = [
   GeneralType('区域1', '11'),

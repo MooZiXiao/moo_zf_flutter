@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:moo_zf_flutter/pages/home/tab_search/data.dart';
+import 'package:moo_zf_flutter/model/room_list_item_data.dart';
 import 'package:moo_zf_flutter/widget/common_image.dart';
 import 'package:moo_zf_flutter/widget/common_tag.dart';
 

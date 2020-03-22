@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:moo_zf_flutter/model/general_type.dart';
 import 'package:moo_zf_flutter/pages/home/tab_search/filter_bar/data.dart';
 import 'package:moo_zf_flutter/scoped_model/room_filter.dart';
 import 'package:moo_zf_flutter/utils/scopoed_model_helper.dart';

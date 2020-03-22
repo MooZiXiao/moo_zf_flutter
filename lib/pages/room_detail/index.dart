@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:moo_zf_flutter/model/room_detail_data.dart';
 import 'package:moo_zf_flutter/pages/home/tab_Index/info/index.dart';
 import 'package:moo_zf_flutter/pages/room_detail/data.dart';
 import 'package:moo_zf_flutter/widget/common_swiper.dart';
