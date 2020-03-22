@@ -39,7 +39,9 @@ class Routes {
     return RoomAddPage();
   });
   static Handler _roomDetailHandler = Handler(handlerFunc: (BuildContext context, Map<String, dynamic> params) {
-    return RoomDetailPage();
+    return RoomDetailPage(
+      roomId: params['roomId'][0],
+    );
   });
   static Handler _notFoundHandler = Handler(handlerFunc: (BuildContext context, Map<String, dynamic> params) {
     return NotFoundPage();

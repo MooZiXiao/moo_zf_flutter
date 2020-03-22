@@ -1,7 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:moo_zf_flutter/config.dart';
 import 'package:moo_zf_flutter/model/room_detail_data.dart';
 import 'package:moo_zf_flutter/pages/home/tab_Index/info/index.dart';
-import 'package:moo_zf_flutter/pages/room_detail/data.dart';
+import 'package:moo_zf_flutter/utils/dio_http.dart';
 import 'package:moo_zf_flutter/widget/common_swiper.dart';
 import 'package:moo_zf_flutter/widget/common_tag.dart';
 import 'package:moo_zf_flutter/widget/common_title.dart';
@@ -20,12 +23,26 @@ class _RoomDetailPageState extends State<RoomDetailPage> {
   RoomDetailData data;
   bool isLike = false;
   bool showAllText = false;
+
+  _getData () async {
+    final url = '/houses/${widget.roomId.substring(1)}';
+
+    var res = await DioHttp.of(context).get(url);
+    var resMap = json.decode(res.toString());
+    var resData = resMap['body'];
+    var roomDetailData = RoomDetailData.fromJson(resData);
+    roomDetailData.houseImgs =
+        roomDetailData.houseImgs.map((item) => Config.BaseUrl + item).toList();
+
+    setState(() {
+      data = roomDetailData;
+    });
+  }
+
   @override
   void initState() {
+    _getData();
     super.initState();
-    setState(() {
-      data = defaultData;
-    });
   }
   @override
   Widget build(BuildContext context) {
