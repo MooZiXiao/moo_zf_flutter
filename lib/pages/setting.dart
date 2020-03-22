@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:moo_zf_flutter/scoped_model/auth.dart';
 import 'package:moo_zf_flutter/utils/common_toast.dart';
+import 'package:moo_zf_flutter/utils/scopoed_model_helper.dart';
 
 class SettingPage extends StatelessWidget {
   @override
@@ -14,6 +16,7 @@ class SettingPage extends StatelessWidget {
         children: <Widget>[
           RaisedButton(
             onPressed: () {
+              ScopedModelHelper.getModel<AuthModel>(context).logout();
               CommonToast.ShowToast('已经退出登陆');
             },
             child: Text(

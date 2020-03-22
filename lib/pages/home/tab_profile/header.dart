@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:moo_zf_flutter/config.dart';
+import 'package:moo_zf_flutter/scoped_model/auth.dart';
+import 'package:moo_zf_flutter/utils/scopoed_model_helper.dart';
 
 var loginAndRegisterStyle = TextStyle(
   color: Colors.white,
@@ -68,8 +71,12 @@ class ProfileHeader extends StatelessWidget {
   }
   
   Widget _loginBuilder (BuildContext context) {
-    String userName = '已登陆用户名';
-    String userImage = 'https://tva1.sinaimg.cn/large/006y8mN6ly1g6tbnovh8jj30hr0hrq3l.jpg';
+    var userInfo = ScopedModelHelper.getModel<AuthModel>(context).userInfo;
+    String userName = userInfo?.nickname ?? '已登陆用户名';
+    String userImage = userInfo?.avatar ?? 'https://tva1.sinaimg.cn/large/006y8mN6ly1g6tbnovh8jj30hr0hrq3l.jpg';
+    if(!userImage.startsWith('http')) {
+      userImage = Config.BaseUrl + userImage;
+    }
     return Container(
       height: 95.0,
       padding: EdgeInsets.only(top: 10.0, left: 20.0, bottom: 20.0),
@@ -113,7 +120,7 @@ class ProfileHeader extends StatelessWidget {
   }
   @override
   Widget build(BuildContext context) {
-    var isLogin = false;
+    var isLogin = ScopedModelHelper.getModel<AuthModel>(context).isLogin;
     
     return isLogin ? _loginBuilder(context) : _noLoginBuilder(context);
   }
