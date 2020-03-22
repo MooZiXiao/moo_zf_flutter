@@ -46,7 +46,7 @@ class _RegisterPageState extends State<RegisterPage> {
     // print('=============');
     // print(resString);
     int status = resString['status'];
-    String description = resString['description'];
+    String description = resString['description'] ?? '内部错误';
     CommonToast.ShowToast(description);
     if(status.toString().startsWith('2')) {
       Navigator.pushReplacementNamed(context, '/login');
