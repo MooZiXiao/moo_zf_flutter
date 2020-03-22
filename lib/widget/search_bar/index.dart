@@ -1,4 +1,13 @@
+import 'dart:convert';
+
+import 'package:city_pickers/city_pickers.dart';
 import 'package:flutter/material.dart';
+import 'package:moo_zf_flutter/config.dart';
+import 'package:moo_zf_flutter/model/general_type.dart';
+import 'package:moo_zf_flutter/scoped_model/city.dart';
+import 'package:moo_zf_flutter/utils/common_toast.dart';
+import 'package:moo_zf_flutter/utils/scopoed_model_helper.dart';
+import 'package:moo_zf_flutter/utils/store.dart';
 import 'package:moo_zf_flutter/widget/common_image.dart';
 
 class SearchBarWidget extends StatefulWidget {
@@ -28,6 +37,38 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
     });
   }
 
+  _saveCity(GeneralType city) async {
+    if(city == null) return;
+    ScopedModelHelper.getModel<CityModel>(context).city = city;
+    var store = await Store.getInstance();
+    var cityString = json.encode(city.toJson());
+    store.setString(StoreKeys.city, cityString);
+  }
+
+  _changeLocation() async {
+    var result = await CityPickers.showCitiesSelector(context: context, theme: ThemeData(primaryColor: Colors.green));
+
+    String cityName = result?.cityName;
+    if(null == cityName) return;
+
+    var city = Config.availableCitys.firstWhere((city) =>cityName.startsWith(city.name), orElse: () {
+      CommonToast.ShowToast('该城市暂未开通！');
+      return null;
+    });
+
+    if(city == null) return;
+
+    _saveCity(city);
+  }
+
+  _getCity() async {
+    var store = await Store.getInstance();
+    var cityString = await store.getString(StoreKeys.city);
+    if(null == cityString) return;
+    var city = GeneralType.formJson(json.decode(cityString));
+    ScopedModelHelper.getModel<CityModel>(context).city = city;
+  }
+
   @override
   void initState() {
     super.initState();
@@ -37,6 +78,11 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
 
   @override
   Widget build(BuildContext context) {
+    var city = ScopedModelHelper.getModel<CityModel>(context).city;
+    if(null == city) {
+      city = Config.availableCitys.first;
+      _getCity();
+    }
     return Container(
       child: Row(
         children: <Widget>[
@@ -44,13 +90,13 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
             padding: EdgeInsets.only(right: 10.0),
             child: GestureDetector(
               onTap: () {
-
+                _changeLocation();
               },
               child: Row(
                 children: <Widget>[
                   Icon(Icons.room, color: Colors.green, size: 16.0,),
                   Text(
-                    '北京',
+                    city.name,
                     style: TextStyle(
                       color: Colors.black,
                       fontSize: 14.0

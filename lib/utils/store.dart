@@ -1,7 +1,8 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
 enum StoreKeys {
-  token
+  token,
+  city
 }
 
 class Store {
